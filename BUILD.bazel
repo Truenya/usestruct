@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "usestruct_lib",
+    srcs = [
+        "example.go",
+        "example2.go",
+        "main.go",
+    ],
+    importpath = "gitlab.hyperus.team/hyp-platform/hyperus/numbat/scripts/usestruct",
+    visibility = ["//visibility:private"],
+    deps = ["@org_golang_x_tools//go/analysis/singlechecker"],
+)
+
+go_binary(
+    name = "usestruct",
+    embed = [":usestruct_lib"],
+    visibility = ["//visibility:public"],
+)
